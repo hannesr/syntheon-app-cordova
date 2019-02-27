@@ -10,7 +10,8 @@
         "classnames": "^2.2.3",
         "cordova-android": "^7.1.4",
         "cordova-browser": "^5.0.4",
-        "cordova-plugin-bluetoothle": "^4.5.3",
+        "cordova-plugin-ble-central": "^1.2.2",
+        "cordova-plugin-compat": "^1.2.0",
         "react": "^15.3.0",
         "react-addons-css-transition-group": "^15.3.0",
         "react-dom": "^15.3.0",
@@ -45,7 +46,7 @@
             "android"
         ],
         "plugins": {
-            "cordova-plugin-bluetoothle": {}
+            "cordova-plugin-ble-central": {}
         }
     }
 }
