@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 
+import Header from './components/Header';
 import Scan from './components/Scan';
 import Syntheon from './components/Syntheon';
 
@@ -12,18 +13,18 @@ class App extends React.Component {
   constructor(props) {
     console.log("... App.constructor");
     super(props);
-    this.state = {device: null};
+    this.state = {device: null, message: null};
   }
 
   onSelect(d) {
-    console.log("... App.onSelect ", d);
+    console.log("... App.onSelect "+JSON.stringify(d));
     ble.connect(d.id,
       () => {
-        console.log("... device connected", d);
+        this.onMessage("Connected: "+d.name);
         this.setState({device: d});
       },
       () => {
-        console.log("... device disconnected", d);
+        this.onMessage("Disconnected");
         //this.setState({device: null});
         // >>> for testing on browser...
         this.setState({device: d});
@@ -32,18 +33,40 @@ class App extends React.Component {
     );
   }
 
-  render() {
-    const panel_rendered = () =>
-      (this.state.device ?
-        <Syntheon device={this.state.device} /> :
-        <Scan onSelect={(d) => this.onSelect(d)} />
-      );
+  onMessage(m) {
+    console.log("MESSAGE: "+m)
+    this.setState({message: m});
+  }
 
+  renderMainPanel() {
+    if (!this.state.device) {
+      return (
+        <Scan
+          onSelect={(d) => this.onSelect(d)}
+          onMessage={(m) => this.onMessage(m)}
+        />
+      );
+    } else {
+      return (
+        <Syntheon
+          device={this.state.device}
+          onMessage={(m) => this.onMessage(m)}
+          onDisconnected={() => this.setState({device: null})}
+        />
+      );
+    }
+  }
+
+  render() {
     return (
       <div>
+        <Header
+          device={this.state.device}
+          message={this.state.message}
+        />
         <CSSTransitionGroup transitionName="push"
           transitionEnterTimeout={ 300 } transitionLeaveTimeout={ 300 }>
-          { panel_rendered() }
+          { this.renderMainPanel() }
         </CSSTransitionGroup>
       </div>
     );

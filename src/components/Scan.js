@@ -1,4 +1,5 @@
 import React from 'react';
+import Selectable from './Selectable';
 
 //import '../css/scan.css';
 
@@ -7,22 +8,29 @@ class Scan extends React.Component {
   constructor(props) {
     console.log("... Scan.constructor");
     super(props);
-    this.state = {scanning:false, devices: [], message: null};
+    this.state = {scanning:false, devices: []};
+  }
+
+  componentDidMount() {
+    console.log("... Scan.componentDidMount");
+    this.onScan();
   }
 
   onScan() {
-    console.log("... Scan.doScan");
-    this.setState({scanning:true, message: 'Scanning....'});
+    console.log("... Scan.onScan");
+    if (typeof(ble) == 'undefined') return;
+    this.setState({scanning:true});
+    this.props.onMessage("Scanning...");
     ble.startScan([],
       (device) => {
         console.log("... device found ",JSON.stringify(device));
+        if (!device.name) device.name = device.id;
         this.setState((state) => {
           return {devices: state.devices.concat([device])};
         });
       },
-      () => {
-        console.log("... startScan failed");
-        this.setState({message: "Scan failed"});
+      (err) => {
+        this.props.onMessage("Scan failed: "+JSON.stringify(err));
         // >>> for testing on browser...
         this.setState((state) => {
           return {devices: state.devices.concat([{name: "Test device", id: "42"}])};
@@ -36,25 +44,25 @@ class Scan extends React.Component {
     console.log("... Scan.onSelect");
     ble.stopScan(
       () => { },
-      () => { this.setState({message: "Stop scan failed"}); }
+      () => { this.props.onMessage("Stop scan failed"); }
     );
     this.props.onSelect(d);
   }
 
   render() {
     const devices_rendered = this.state.devices.map((d) =>
-      <li key={d.id}
-        className="btn"
-        onClick={() => this.onSelect(d)}>
-        {d.name}
-      </li>
+      <Selectable key={d.id}
+        text={d.name}
+        icon={d.name==d.id ? "custom" : "bluetooth"}
+        onClick={() => this.onSelect(d)}
+      />
     );
 
     return (
       <div className="scan">
-        <h1>Syntheon / Select device</h1>
-        <p>{ this.state.message }</p>
-        <button onClick={() => this.onScan()}>Scan</button>
+        {!this.state.scanning &&
+          <Selectable text="Scan" onClick={() => this.onScan()} />
+        }
         <ul>{ devices_rendered }</ul>
       </div>
     );
