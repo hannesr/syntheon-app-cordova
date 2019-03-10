@@ -7,6 +7,7 @@ class Selectable extends React.Component {
     return (
       <li onClick={() => this.props.onClick()}>
       {this.props.text}
+      {this.props.selected ? ' *' : ''}
       </li>
     );
   }
