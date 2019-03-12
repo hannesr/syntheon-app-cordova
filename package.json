@@ -1,5 +1,10 @@
 {
     "name": "com.hrcon.syntheon",
+    "description": "Mobile app for controlling Syntheon for Raspberry Pi",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/hannesr/syntheon-app.git"
+    },
     "version": "1.0.0",
     "main": "src/index.js",
     "dependencies": {
@@ -37,8 +42,8 @@
         "test": "echo \"No tests (yet!) -- submit a PR?\" && exit 0"
     },
     "keywords": [],
-    "author": "none specified",
-    "license": "none specified",
+    "author": "Hannes Romppainen",
+    "license": "GPL-2.0-only",
     "displayName": "Syntheon",
     "cordova": {
         "platforms": [
