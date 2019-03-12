@@ -63,4 +63,4 @@ class Syntheon extends React.Component {
 
 }
 
-module.exports = Syntheon;
+export default Syntheon;

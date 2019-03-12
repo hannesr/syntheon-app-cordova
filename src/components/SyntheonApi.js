@@ -64,4 +64,4 @@ class SyntheonApi {
 
 }
 
-module.exports = SyntheonApi;
+export default SyntheonApi;

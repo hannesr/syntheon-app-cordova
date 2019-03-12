@@ -13,4 +13,4 @@ class Selectable extends React.Component {
   }
 }
 
-module.exports = Selectable;
+export default Selectable;

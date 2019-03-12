@@ -8,10 +8,10 @@
     "version": "1.0.0",
     "main": "src/index.js",
     "dependencies": {
-        "babel-core": "^6.4.5",
-        "babel-loader": "^6.2.1",
-        "babel-preset-es2015": "^6.3.13",
-        "babel-preset-react": "^6.3.13",
+        "@babel/core": "^7.3.4",
+        "@babel/preset-env": "^7.3.4",
+        "@babel/preset-react": "^7.0.0",
+        "babel-loader": "^8.0.5",
         "classnames": "^2.2.3",
         "cordova-android": "^7.1.4",
         "cordova-browser": "^5.0.4",
@@ -21,16 +21,14 @@
         "react-addons-css-transition-group": "^15.3.0",
         "react-dom": "^15.3.0",
         "react-tappable": "^0.8.3",
-        "webpack": "^1.12.12",
-        "webpack-dev-server": "^1.14.1"
+        "webpack": "^4.29.6"
     },
     "devDependencies": {
-        "babel-preset-react-hmre": "^1.0.1",
-        "css-loader": "^0.23.1",
+        "css-loader": "^2.1.1",
         "elementtree": "^0.1.6",
-        "replace": "^0.3.0",
-        "style-loader": "^0.13.0",
-        "webpack-merge": "^0.7.3"
+        "replace": "^1.1.0",
+        "style-loader": "^0.23.1",
+        "webpack-cli": "^3.2.3"
     },
     "scripts": {
         "browser": "cordova run browser",
@@ -38,7 +36,6 @@
         "ios": "cordova run ios",
         "prepare": "node config && webpack && cordova prepare",
         "build": "node config && webpack && cordova build",
-        "start": "node config && HOST=0.0.0.0 webpack-dev-server",
         "test": "echo \"No tests (yet!) -- submit a PR?\" && exit 0"
     },
     "keywords": [],
@@ -53,5 +50,11 @@
         "plugins": {
             "cordova-plugin-ble-central": {}
         }
+    },
+    "babel": {
+        "presets": [
+            "@babel/preset-react",
+            "@babel/preset-env"
+        ]
     }
 }

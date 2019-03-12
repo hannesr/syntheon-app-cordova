@@ -1,4 +1,3 @@
-const merge = require('webpack-merge');
 const path = require('path');
 const webpack = require('webpack');
 
@@ -11,52 +10,28 @@ const PATHS = {
 process.env.BABEL_ENV = ENV;
 
 const common = {
+  mode: (ENV=='development' ? 'development' : 'production'),
   entry: PATHS.src,
   output: {
     path: PATHS.build,
     filename: 'bundle.js',
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.css$/,
-        loaders: ['style', 'css?url=false'],
-        include: PATHS.src,
+        use: ['style-loader', 'css-loader']
       },
       {
-        test: /\.jsx?$/,
-        loader: 'babel?cacheDirectory',
-        include: PATHS.src,
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader?cacheDirectory=true',
+          options: { presets: ['@babel/preset-env'] }
+        }
       }
     ]
   }
 };
 
-if (ENV === 'development') {
-  module.exports = merge(common, {
-    devServer: {
-      contentBase: PATHS.build,
-
-      // Enable history API fallback so HTML5 History API based
-      // routing works. This is a good default that will come
-      // in handy in more complicated setups.
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      progress: true,
-
-      // Display only errors to reduce the amount of output.
-      stats: 'errors-only',
-
-      // Parse host and port from env so this is easy to customize.
-      host: process.env.HOST,
-      port: process.env.PORT,
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-    ],
-  });
-} else {
-  // config can be added here for minifying / etc
-  module.exports = merge(common, {});
-}
+module.exports = common;

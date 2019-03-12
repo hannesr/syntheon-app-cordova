@@ -70,4 +70,4 @@ class Scan extends React.Component {
 
 }
 
-module.exports = Scan;
+export default Scan;
