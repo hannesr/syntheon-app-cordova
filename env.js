@@ -1,13 +1,12 @@
 'use strict';
 
 const TARGET = process.env.npm_lifecycle_event;
-let env = 'build';
+let env = 'development';
 
 switch (TARGET) {
-  case 'start':
   case 'ios':
   case 'android':
-    env = 'development';
+    env = 'production';
 }
 
 module.exports = env;

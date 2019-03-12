@@ -2,7 +2,6 @@ import './css/index.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
 
 import Header from './components/Header';
 import Scan from './components/Scan';
@@ -64,10 +63,7 @@ class App extends React.Component {
           device={this.state.device}
           message={this.state.message}
         />
-        <CSSTransitionGroup transitionName="push"
-          transitionEnterTimeout={ 300 } transitionLeaveTimeout={ 300 }>
-          { this.renderMainPanel() }
-        </CSSTransitionGroup>
+        { this.renderMainPanel() }
       </div>
     );
   }

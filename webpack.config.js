@@ -10,7 +10,7 @@ const PATHS = {
 process.env.BABEL_ENV = ENV;
 
 const common = {
-  mode: (ENV=='development' ? 'development' : 'production'),
+  mode: ENV,
   entry: PATHS.src,
   output: {
     path: PATHS.build,
