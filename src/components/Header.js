@@ -1,6 +1,8 @@
 import React from 'react';
+import Navbar from 'react-bootstrap/Navbar'
+import Nav from 'react-bootstrap/Nav'
 
-//import '../css/header.css';
+import '../css/header.css';
 
 class Header extends React.Component {
   render() {
@@ -9,8 +11,20 @@ class Header extends React.Component {
       "Syntheon";
     return(
       <div>
-        <h1>{name}</h1>
-        <p><i>{this.props.message}</i></p>
+        <Navbar className="header-title" expand>
+          <Navbar.Brand>Syntheon</Navbar.Brand>
+          <Navbar.Collapse className="justify-content-end">
+            { this.props.device &&
+              <Navbar.Text>
+                connected to
+                <strong>{this.props.device.name}</strong>
+              </Navbar.Text>
+            }
+          </Navbar.Collapse>
+        </Navbar>
+        <Navbar className="header-msg" expand>
+          <span>{this.props.message}</span>
+        </Navbar>
       </div>
     );
   }

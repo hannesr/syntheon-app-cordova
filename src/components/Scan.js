@@ -1,7 +1,7 @@
 import React from 'react';
-import Selectable from './Selectable';
 
-//import '../css/scan.css';
+import Selectable from './Selectable';
+import '../css/scan.css';
 
 class Scan extends React.Component {
 
@@ -59,11 +59,11 @@ class Scan extends React.Component {
     );
 
     return (
-      <div className="scan">
+      <div className="scan-page">
         {!this.state.scanning &&
           <Selectable text="Scan" onClick={() => this.onScan()} />
         }
-        <ul>{ devices_rendered }</ul>
+        { devices_rendered }
       </div>
     );
   }

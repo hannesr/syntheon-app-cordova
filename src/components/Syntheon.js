@@ -1,8 +1,8 @@
 import React from 'react';
+
 import Selectable from './Selectable';
 import SyntheonApi from './SyntheonApi';
-
-//import '../css/syntheon.css';
+import '../css/syntheon.css';
 
 class Syntheon extends React.Component {
 
@@ -52,8 +52,8 @@ class Syntheon extends React.Component {
     );
 
     return (
-      <div className="syntheon">
-        <ul>{bank_rendered}</ul>
+      <div className="syntheon-page">
+        {bank_rendered}
         <Selectable text="Disconnect"
           onClick={() => this.onDisconnect()}
         />

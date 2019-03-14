@@ -1,0 +1,9 @@
+.header-title {
+  background-color: #a6a6da;
+}
+.header-msg {
+  background-color: #d1cef1;
+  min-height: 1.6em;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
