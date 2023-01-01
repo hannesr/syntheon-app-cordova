@@ -11,7 +11,7 @@
         "@babel/core": "^7.3.4",
         "@babel/preset-env": "^7.3.4",
         "@babel/preset-react": "^7.0.0",
-        "babel-loader": "^8.0.5",
+        "babel-loader": "^8.3.0",
         "bootstrap": "^4.3.1",
         "classnames": "^2.2.3",
         "cordova-android": "^7.1.4",
@@ -24,14 +24,14 @@
         "react-bootstrap": "^1.0.0-beta.5",
         "react-dom": "^16.8.4",
         "react-ionicons": "^3.0.1",
-        "webpack": "^4.29.6"
+        "webpack": "^5.75.0"
     },
     "devDependencies": {
-        "css-loader": "^2.1.1",
+        "css-loader": "^6.7.3",
         "elementtree": "^0.1.6",
         "replace": "^1.1.0",
-        "style-loader": "^0.23.1",
-        "webpack-cli": "^3.2.3"
+        "style-loader": "^3.3.1",
+        "webpack-cli": "^5.0.1"
     },
     "scripts": {
         "browser": "cordova run browser",
